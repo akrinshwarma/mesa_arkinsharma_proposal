@@ -13,29 +13,23 @@ This repository contains a suite of Agent-Based Models (ABM) developed using the
    - Simulates stochastic particle movement in a fluid medium.
 3. **Diode Router:**
    - Agent-based logic applied to network routing and directional flow.
+## 🔧 Engineering & Architectural Fixes (MetaAgent Logic)
 
-### What I Changed and Why
+To prepare this framework for a GSoC-level contribution, I performed a significant refactor of the core agent logic to ensure it meets the strict stability requirements of the Mesa ecosystem.
 
-### . 	Deleted the "God Factory” mypyate_meta_agent):
-The Problem:
- The old code used type() to invent new Python classes while the simulation was running and then forcefully copied variables (__dict__) from children to parents. This creates invisible bugs and makes type checking impossible.
+### 1. Deprecated Dynamic Class Generation (The "God Factory")
+- **The Problem:** The legacy code used `type()` to dynamically invent Python classes at runtime and forcefully copied `__dict__` attributes between objects. This bypassed Python’s inheritance model and made the code impossible to debug or type-check.
+- **The Fix:** Shifted to an explicit subclassing model. Users now subclass `MetaAgent`, making the framework vastly more predictable and compatible with IDE autocompletion.
 
-The Fix:
- By requiring the user to explicitly subclass MetaAgent, your framework becomes vastly easier to test and maintain.
+### 2. Resolved Type Erasure in Sorting
+- **The Problem:** The `remove_constituting_agents` function used a sorting lambda (`lambda x: x.uniqueid or 0`) that would crash with a `TypeError` if `unique_id` was a string (e.g., "Agent_A") instead of an integer.
+- **The Fix:** Implemented a deterministic set extraction (`next(iter(...))`) that handles any `unique_id` data type without risk of comparison crashes.
 
-### . 	Fixed the Type Crash Bug in remove_constituting_agents:
-The Problem:
- The old code tried to sort remaining meta-agents using lambda x: x.uniqueid or 0. If a user defined uniqueid as a string (e.g., "Agent_A"), Python would throw a TypeError trying to compare strings to integers.
+### 3. State Encapsulation & Monkey-Patching Safety
+- **The Fix:** Introduced private methods (`_register_child` and `_unregister_child`) to manage how `.meta_agents` attributes are injected into child agents. This encapsulates the "monkey-patching" logic, protecting the global state of the simulation.
 
-The Fix:
- I replaced this with a deterministic set extraction (next(iter(...))) that won't crash regardless of what data type the unique_id is.
-
-### . 	Encapsulated State Modification:
-
-I created private methods (_register_child and _unregister_child) to handle the injection of the .meta_agents attribute onto the child agents. This keeps the messy "monkey-patching" logic contained in one place rather than scattered across the file.
-Strict Type Hinting:
-
-I upgraded all the type hints to use the modern typing. Type and collections.abc.Iterable. This will ensure the code passes mypy checks, which is a hard requirement for contributing to the core Mesa repository.
+### 4. Modern Type Hinting (Mypy Compliance)
+- **The Fix:** Upgraded all type hints to use `typing.Type` and `collections.abc.Iterable`. This ensures the codebase passes rigorous `mypy` checks, which is a prerequisite for any code merging into the main Mesa repository.
 
 ## 💻 Tech Stack
 - **Engine:** Mesa (Python)
