@@ -1,0 +1,8 @@
+mesa
+solara
+reacton
+ipyvuetify
+matplotlib
+numpy
+networkx
+pandas
