@@ -3,10 +3,6 @@ Project: Brownian Motion (Gas Particle Simulation)
 
 The Phenomenon: Brownian motion is the random, uncontrolled movement of microscopic particles suspended in a fluid (a liquid or a gas).
 
-The Physics: Because atoms and molecules are constantly vibrating and moving (kinetic energy), they endlessly crash into each other. 
-When a larger particle is suspended in this environment, it gets bombarded asymmetrically by these invisible molecules from all sides, causing it to jitter and zig-zag 
-unpredictably. It was first observed by botanist Robert Brown looking at pollen in water, and later mathematically proven by Albert Einstein, confirming the existence of atoms.
-
 Description: 
 This model simulates the erratic, random movement of gas particles in a closed 
 environment, demonstrating classical Brownian motion. Particles are placed on a 
