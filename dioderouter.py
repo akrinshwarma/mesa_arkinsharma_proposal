@@ -3,11 +3,6 @@ Project: Diode Router (Network-Based Circuit Simulation)
 
 The Phenomenon: A diode is an electronic component that acts as a one-way valve for electrical current.
 
-The Physics: In semiconductor physics, a standard diode is created by joining two different types of doped materials (a p-n junction). When voltage is applied in 
-one direction (forward bias), the barrier between these materials collapses, and electrons flow freely. If the voltage tries to push the other way (reverse bias), the 
-barrier widens, completely blocking the flow of electrons. In your model, the graph edges act as the conductive wire, and the directed nature of the graph perfectly 
-mimics this asymmetric conductance.
-
 Description: 
 This model simulates the flow of electrons through a circuit. Instead of using a 
 traditional 2D spatial grid, it models the environment as a mathematical graph 
