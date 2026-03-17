@@ -1,3 +1,27 @@
+"""
+Project: Thermal Equilibrium (Entropy & Heat Exchange Simulation)
+
+The Phenomenon: Thermal equilibrium is the state in which two or more physical systems 
+exchange no net heat energy. This simulation demonstrates the Second Law of 
+Thermodynamics as particles reach a maximum entropy state.
+
+Description:
+This model simulates the local kinetic energy exchange between gas particles. 
+By starting with an extreme initial energy distribution, the model tracks 
+how local interactions eventually lead to a uniform temperature (energy) 
+distribution throughout the system.
+
+Key Mesa Mechanics Demonstrated:
+- Advanced Initialization: Replaced uniform randomness with a Beta Distribution 
+  (α=0.5, β=0.5) to simulate extreme high-entropy starting states.
+- Local Interaction Logic: Implements a "collision-style" energy transfer 
+  mechanism between neighboring agents.
+- Optimized Rendering: Utilizes vectorized Matplotlib scatter plots for 
+  real-time visualization of high-density particle systems.
+- Reactive UI State Management: Solved Solara component stalling using a 
+  custom `version` state-tracking toggle and ipyvuetify (v.Div) wrappers.
+"""
+
 import mesa
 import solara
 import reacton.ipyvuetify as v
